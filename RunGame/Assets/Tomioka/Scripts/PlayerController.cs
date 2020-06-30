@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    
+
     [SerializeField]
-    private float speed = 1f;
+    private float speed = 400;
 
     Rigidbody2D rb2d;
 
@@ -19,14 +21,17 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKey(KeyCode.RightArrow))
-        {
-            rb2d.AddForce(new Vector3(speed, 0, 0));
-        }
-
-        //transform.Translate(+0.1f, 0, 0);
+        PlayerMove();
+        
         Jump();
     }
+
+    private void PlayerMove()
+    {
+        speed = 2;
+        rb2d.velocity = new Vector2(speed, rb2d.velocity.y);
+    }
+
 
     private void Sliding()
     {
@@ -35,9 +40,10 @@ public class PlayerController : MonoBehaviour
 
     private void Jump()
     {
-        if (Input.GetKeyDown("space"))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            rb2d.AddForce(Vector2.up * speed);
+            rb2d.AddForce(Vector2.up * 400);
+            Debug.Log(speed);
         }
     }
 
