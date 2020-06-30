@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    
+
 
     [SerializeField]
-    private float speed = 400;
+    private float speed = 2;
 
     Rigidbody2D rb2d;
 
@@ -22,13 +22,12 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         PlayerMove();
-        
+
         Jump();
     }
 
     private void PlayerMove()
     {
-        speed = 2;
         rb2d.velocity = new Vector2(speed, rb2d.velocity.y);
     }
 
@@ -44,6 +43,15 @@ public class PlayerController : MonoBehaviour
         {
             rb2d.AddForce(Vector2.up * 400);
             Debug.Log(speed);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D col)
+    {
+        //後でtagを変える
+        if (col.tag == "Finish")
+        {
+            Debug.Log("ダメージ");
         }
     }
 
