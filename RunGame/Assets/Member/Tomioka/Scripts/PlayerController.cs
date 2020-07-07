@@ -4,12 +4,16 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-
+    [SerializeField]
+    private GameObject bomb;
 
     [SerializeField]
-    private float speed = 2;
+    private float normalSpeed = 2;
+    private float dashSpeed;
 
     Rigidbody2D rb2d;
+
+    private bool playerCol =true;
 
     // Use this for initialization
     void Start()
@@ -22,13 +26,21 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         PlayerMove();
-
+        UseItem();
         Jump();
     }
 
     private void PlayerMove()
     {
-        rb2d.velocity = new Vector2(speed, rb2d.velocity.y);
+        if (Input.GetKey(KeyCode.D))
+        {
+            dashSpeed = normalSpeed * 3;
+            rb2d.velocity = new Vector2(dashSpeed, rb2d.velocity.y);
+        }
+        else
+        {
+            rb2d.velocity = new Vector2(normalSpeed, rb2d.velocity.y);
+        }
     }
 
 
@@ -42,17 +54,47 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && rb2d.velocity.y == 0)
         {
             rb2d.AddForce(Vector2.up * 400);
-            Debug.Log(speed);
         }
     }
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        //後でtagを変える
-        if (col.tag == "Finish")
+        if (playerCol == true)
         {
-            Debug.Log("ダメージ");
+            playerCol = false;
+            //後でtagを変える
+            if (col.tag == "Finish")
+            {
+                Debug.Log("ダメージ");
+                Invoke("InvincibleTime", 3f);
+            }
         }
     }
 
+    private void UseItem()
+    {
+        //爆弾テスト
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            Instantiate(bomb, new Vector2(this.transform.position.x + 1f, this.transform.position.y), Quaternion.identity);
+            bomb.GetComponent<BombTest>().UseBomb(new Vector2(1000000, 1000000));
+        }
+
+        //花火
+        if (Input.GetKeyDown(KeyCode.N))
+        {
+           
+        }
+
+    }
+
+    private void InvincibleTime()
+    {
+        playerCol = true;
+    }
+
+    public void SpeedUp()
+    {
+        normalSpeed += 1;
+    }
 }

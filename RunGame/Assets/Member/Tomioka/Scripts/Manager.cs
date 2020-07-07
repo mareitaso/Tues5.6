@@ -4,15 +4,31 @@ using UnityEngine;
 
 public class Manager : SingletonMonoBehaviour<Manager>
 {
-    // Start is called before the first frame update
+    [SerializeField]
+    private PlayerController playerController;
+    
+    private float gameTime;
+
+    [SerializeField]
+    private float speedUpTime;
+    
     void Start()
     {
-        
+        gameTime = 0;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        TimeManager();
+    }
+
+    private void TimeManager()
+    {
+        gameTime += Time.deltaTime;
+        if (gameTime > speedUpTime)
+        {
+            gameTime = 0;
+            playerController.SpeedUp();
+        }
     }
 }
