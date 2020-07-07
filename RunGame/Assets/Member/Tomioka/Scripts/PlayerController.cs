@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour
 
     private void Jump()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && rb2d.velocity.y == 0)
         {
             rb2d.AddForce(Vector2.up * 400);
             Debug.Log(speed);
