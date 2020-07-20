@@ -13,7 +13,9 @@ public class PlayerController : MonoBehaviour
 
     Rigidbody2D rb2d;
 
-    private bool playerCol =true;
+    private bool playerCol = true;
+
+    public float starTime = 3;
 
     // Use this for initialization
     void Start()
@@ -83,7 +85,7 @@ public class PlayerController : MonoBehaviour
         //花火
         if (Input.GetKeyDown(KeyCode.N))
         {
-           
+
         }
 
     }
@@ -97,4 +99,5 @@ public class PlayerController : MonoBehaviour
     {
         normalSpeed += 1;
     }
+
 }
