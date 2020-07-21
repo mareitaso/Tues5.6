@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -10,6 +11,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float normalSpeed = 2;
     private float dashSpeed;
+
+    public int playerHP = 10;
+    [SerializeField]
+    Text text;
+
 
     Rigidbody2D rb2d;
 
@@ -30,6 +36,8 @@ public class PlayerController : MonoBehaviour
         PlayerMove();
         UseItem();
         Jump();
+        PlayerGameOver();
+        text.text = playerHP.ToString();
     }
 
     private void PlayerMove()
@@ -53,9 +61,21 @@ public class PlayerController : MonoBehaviour
 
     private void Jump()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && rb2d.velocity.y == 0)
+        if (playerHP >=0)
         {
-            rb2d.AddForce(Vector2.up * 400);
+            if (Input.GetKeyDown(KeyCode.Space) && rb2d.velocity.y == 0)
+            {
+                rb2d.AddForce(Vector2.up * 400);
+            }
+        }
+    }
+
+    private void PlayerGameOver()
+    {
+        if (playerHP <= 0)
+        {
+            playerHP = 0;
+            normalSpeed = 0;
         }
     }
 
@@ -66,10 +86,12 @@ public class PlayerController : MonoBehaviour
             //後でFinishのtagを変える
             //ここに攻撃判定があるものを追加していく
             case "Finish":
+            case "wall":
 
                 if (playerCol == true)
                 {
                     playerCol = false;
+                    playerHP -= 3;
                     Debug.Log("ダメージ");
                     Invoke("InvincibleTime", 3f);
                 }
