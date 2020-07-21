@@ -1,5 +1,4 @@
-﻿using BirdStrike.MIKOMA.Scripts.Utilities;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,7 +15,7 @@ public class test : MonoBehaviour
     {
         if(Input.GetMouseButtonDown(0))
         {
-            SceneLoader.LoadScene(SCENE_TYPE.main);
+            SceneMove.LoadScene(SCENE_TYPE.main);
         }
     }
 }
