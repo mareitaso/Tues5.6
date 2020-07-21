@@ -59,19 +59,28 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D col)
+    public void OnCollisionEnter2D(Collision2D col)
     {
-        if (playerCol == true)
+        switch (col.gameObject.tag)
         {
-            playerCol = false;
-            //後でtagを変える
-            if (col.tag == "Finish")
-            {
-                Debug.Log("ダメージ");
-                Invoke("InvincibleTime", 3f);
-            }
+            //後でFinishのtagを変える
+            //ここに攻撃判定があるものを追加していく
+            case "Finish":
+
+                if (playerCol == true)
+                {
+                    playerCol = false;
+                    Debug.Log("ダメージ");
+                    Invoke("InvincibleTime", 3f);
+                }
+                break;
+
+            default:
+                //Debug.Log(col.gameObject.tag);
+                break;
         }
     }
+
 
     private void UseItem()
     {

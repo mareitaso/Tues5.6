@@ -11,12 +11,11 @@ public class BombTest : MonoBehaviour
     public void UseBomb(Vector2 direction)
     {
         GetComponent<Rigidbody2D>().AddForce(direction);
-        //Debug.Log("呼ばれた");
     }
 
-    private void OnTriggerEnter2D(Collider2D col)
+    private void OnCollisionEnter2D(Collision2D col)
     {
-        if (col.tag == ("wall"))
+        if (col.gameObject.tag == ("wall"))
         {
             Destroy(this.gameObject);
         }
