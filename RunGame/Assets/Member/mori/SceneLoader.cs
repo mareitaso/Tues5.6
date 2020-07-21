@@ -9,7 +9,7 @@ namespace BirdStrike.MIKOMA.Scripts.Utilities
         /// <summary>
         /// 前のシーンから引き継いだデータ
         /// </summary>
-        public static SceneDataPack PreviousSceneData;
+        //public static SceneDataPack PreviousSceneData;
 
         /// <summary>
         /// シーン遷移マネージャ
@@ -33,10 +33,10 @@ namespace BirdStrike.MIKOMA.Scripts.Utilities
         /// <summary>
         ///　シーン遷移処理中か
         /// </summary>
-        public static bool IsTransitionRunning
-        {
-            get { return TransitionManager.IsRunning; }
-        }
+        //public static bool IsTransitionRunning
+        //{
+        //    get { return TransitionManager.IsRunning; }
+        //}
 
         /// <summary>
         /// シーン遷移を行う
@@ -46,17 +46,17 @@ namespace BirdStrike.MIKOMA.Scripts.Utilities
         /// <param name="additiveLoadScenes">追加でロードするシーン</param>
         /// <param name="autoMove">トランジションアニメーションを自動的に完了させるか
         ///                        falseの場合はOpen()を実行しないとトランジションが終了しない</param>
-        public static void LoadScene(SCENE_TYPE scene,
-            SceneDataPack data = null,
-            SCENE_TYPE[] additiveLoadScenes = null
+        public static void LoadScene(SCENE_TYPE scene
+            //SceneDataPack data = null,
+            //SCENE_TYPE[] additiveLoadScenes = null
             )
         {
-            if (data == null)
-            {
-                //引き継ぐデータが未指定の場合はシーン情報のみを詰める
-                data = new DefaultSceneDataPack(TransitionManager.CurrentGameScene, additiveLoadScenes);
-            }
-            TransitionManager.StartTransaction(scene, data, additiveLoadScenes);
+            //if (data == null)
+            //{
+            //    //引き継ぐデータが未指定の場合はシーン情報のみを詰める
+            //    data = new DefaultSceneDataPack(TransitionManager.CurrentGameScene, additiveLoadScenes);
+            //}
+            TransitionManager.StartTransaction(scene);
         }
     }
 }

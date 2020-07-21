@@ -1,15 +1,8 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using System.IO;
-using System.Linq;
-using System.Text;
 using System;
-using System.Data.SqlTypes;
-using BirdStrike.MIKOMA.Scripts.Utilities.SceneDataPacks;
-using UnityEngine.UI;
+
 
 public enum SCENE_TYPE
     {
@@ -44,12 +37,12 @@ namespace BirdStrike.MIKOMA.Scripts.Utilities.SceneDataPacks
     public class DefaultSceneDataPack : SceneDataPack
     {
         private readonly SCENE_TYPE _prevGameScenes;
-        private readonly SCENE_TYPE[] _additiveScenes;
+        //private readonly SCENE_TYPE[] _additiveScenes;
 
-        public SCENE_TYPE[] AdditiveScenes
-        {
-            get { return _additiveScenes; }
-        }
+        //public SCENE_TYPE[] AdditiveScenes
+        //{
+        //    get { return _additiveScenes; }
+        //}
 
         public override SCENE_TYPE PreviousGameScene
         {
@@ -61,11 +54,11 @@ namespace BirdStrike.MIKOMA.Scripts.Utilities.SceneDataPacks
             get { return null; }
         }
 
-        public DefaultSceneDataPack(SCENE_TYPE prev, SCENE_TYPE[] additive)
-        {
-            _prevGameScenes = prev;
-            _additiveScenes = additive;
-        }
+        //public DefaultSceneDataPack(SCENE_TYPE prev, SCENE_TYPE[] additive)
+        //{
+        //    _prevGameScenes = prev;
+        //    _additiveScenes = additive;
+        //}
     }
 }
 
@@ -87,30 +80,30 @@ namespace BirdStrike.MIKOMA.Scripts.Utilities.Transition
 
         /// <summary>
         /// 現在のシーン情報
-        /// </summary>
-        public SCENE_TYPE CurrentGameScene
-        {
-            get { return _currentGameScene; }
-        }
+        ///// </summary>
+        //public SCENE_TYPE CurrentGameScene
+        //{
+        //    get { return _currentGameScene; }
+        //}
 
 
-        private void Awake()
-        {
-            //勝手に消さない
-            DontDestroyOnLoad(gameObject);
+        //private void Awake()
+        //{
+        //    //勝手に消さない
+        //    DontDestroyOnLoad(gameObject);
 
-            try
-            {
-                //現在のシーンを取得する
-                _currentGameScene =
-                    (SCENE_TYPE)Enum.Parse(typeof(SCENE_TYPE), SceneManager.GetActiveScene().name, false);
-            }
-            catch
-            {
-                Debug.Log("現在のシーンの取得に失敗");
-                _currentGameScene = SCENE_TYPE.main; //Debugシーンとかの場合は適当なシーンで埋めておく
-            }
-        }
+        //    try
+        //    {
+        //        //現在のシーンを取得する
+        //        _currentGameScene =
+        //            (SCENE_TYPE)Enum.Parse(typeof(SCENE_TYPE), SceneManager.GetActiveScene().name, false);
+        //    }
+        //    catch
+        //    {
+        //        Debug.Log("現在のシーンの取得に失敗");
+        //        _currentGameScene = SCENE_TYPE.main; //Debugシーンとかの場合は適当なシーンで埋めておく
+        //    }
+        //}
 
         /// <summary>
         /// シーン遷移を実行する
@@ -120,23 +113,23 @@ namespace BirdStrike.MIKOMA.Scripts.Utilities.Transition
         /// <param name="additiveLoadScenes">追加ロードするシーン</param>
         /// <param name="autoMove">トランジションの自動遷移を行うか</param>
         public void StartTransaction(
-            SCENE_TYPE nextScene,
-            SceneDataPack data,
-            SCENE_TYPE[] additiveLoadScenes
+            SCENE_TYPE nextScene
+            //SceneDataPack data,
+            //SCENE_TYPE[] additiveLoadScenes
             
             )
         {
             if (_isRunning) return;
-            StartCoroutine(TransitionCoroutine(nextScene, data, additiveLoadScenes));
+            StartCoroutine(TransitionCoroutine(nextScene));
         }
 
         /// <summary>
         /// シーン遷移処理の本体
         /// </summary>
         private IEnumerator TransitionCoroutine(
-            SCENE_TYPE nextScene,
-            SceneDataPack data,
-            SCENE_TYPE[] additiveLoadScenes
+            SCENE_TYPE nextScene
+            //SceneDataPack data,
+            //SCENE_TYPE[] additiveLoadScenes
             
             )
         {
@@ -144,7 +137,7 @@ namespace BirdStrike.MIKOMA.Scripts.Utilities.Transition
             _isRunning = true;
 
             //前のシーンから受け取った情報を登録
-            SceneLoader.PreviousSceneData = data;
+            //SceneLoader.PreviousSceneData = data;
 
             //メインとなるシーンをSingleで読み込む
             yield return SceneManager.LoadSceneAsync(nextScene.ToString(), LoadSceneMode.Single);
