@@ -5,18 +5,16 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     GameObject player;
-    [SerializeField]
-    float _speed;
-    [SerializeField]
-    float _timar;
+    float _speed = 10f;
+    float _timar = 5f;
     bool IsArrivedDestination;
-    [SerializeField]
     PlayerController player2;
 
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.Find("Player");
+        player2 = player.GetComponent<PlayerController>();
     }
 
     private void OnTriggerEnter2D(Collider2D col)
