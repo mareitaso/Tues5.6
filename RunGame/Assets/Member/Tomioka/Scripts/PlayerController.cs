@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -11,9 +12,16 @@ public class PlayerController : MonoBehaviour
     private float normalSpeed = 2;
     private float dashSpeed;
 
-    Rigidbody2D rb2d;
+    public int playerHP = 10;
 
-    private bool playerCol =true;
+    private Rigidbody2D rb2d;
+
+    //[HideInInspector]
+    public bool jumpCom;
+
+    private bool playerCol = true;
+
+    public float starTime = 3;
 
     // Use this for initialization
     void Start()
@@ -27,7 +35,15 @@ public class PlayerController : MonoBehaviour
     {
         PlayerMove();
         UseItem();
-        Jump();
+        PlayerGameOver();
+
+        if (playerHP >= 0)
+        {
+            if (Input.GetKeyDown(KeyCode.Space) && rb2d.velocity.y == 0)
+            {
+                Jump();
+            }
+        }
     }
 
     private void PlayerMove()
@@ -49,27 +65,44 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    private void Jump()
+    public void Jump()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && rb2d.velocity.y == 0)
+        rb2d.AddForce(Vector2.up * 400);
+    }
+
+    private void PlayerGameOver()
+    {
+        if (playerHP <= 0)
         {
-            rb2d.AddForce(Vector2.up * 400);
+            playerHP = 0;
+            normalSpeed = 0;
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D col)
+    public void OnCollisionEnter2D(Collision2D col)
     {
-        if (playerCol == true)
+        switch (col.gameObject.tag)
         {
-            playerCol = false;
-            //後でtagを変える
-            if (col.tag == "Finish")
-            {
-                Debug.Log("ダメージ");
-                Invoke("InvincibleTime", 3f);
-            }
+            //後でFinishのtagを変える
+            //ここに攻撃判定があるものを追加していく
+            case "Finish":
+            case "wall":
+
+                if (playerCol == true)
+                {
+                    playerCol = false;
+                    playerHP -= 3;
+                    Debug.Log("ダメージ");
+                    Invoke("InvincibleTime", 3f);
+                }
+                break;
+
+            default:
+                //Debug.Log(col.gameObject.tag);
+                break;
         }
     }
+
 
     private void UseItem()
     {
@@ -83,7 +116,7 @@ public class PlayerController : MonoBehaviour
         //花火
         if (Input.GetKeyDown(KeyCode.N))
         {
-           
+
         }
 
     }
@@ -97,4 +130,5 @@ public class PlayerController : MonoBehaviour
     {
         normalSpeed += 1;
     }
+
 }
