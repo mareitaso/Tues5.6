@@ -88,14 +88,9 @@ public class PlayerController : MonoBehaviour
             //ここに攻撃判定があるものを追加していく
             case "Finish":
             case "wall":
-
-                if (playerCol == true)
-                {
-                    playerCol = false;
-                    playerHP -= 3;
-                    Debug.Log("ダメージ");
-                    Invoke("InvincibleTime", 3f);
-                }
+             
+                PlayerDamage();
+                
                 break;
 
             default:
@@ -122,6 +117,17 @@ public class PlayerController : MonoBehaviour
 
         }
 
+    }
+
+    public void PlayerDamage()
+    {
+        if (playerCol == true)
+        {
+            playerCol = false;
+            playerHP -= 3;
+            Debug.Log("ダメージ");
+            Invoke("InvincibleTime", 3f);
+        }
     }
 
     private void InvincibleTime()

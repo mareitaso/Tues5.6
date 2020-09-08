@@ -12,13 +12,16 @@ public class EnemyCreate : MonoBehaviour
     [SerializeField]
     private GameObject dronePrefab;
     [SerializeField]
-    private GameObject enemyPrefab;
+    private GameObject cannonPrefab;
+
+    [SerializeField]
+    private bool generatWall, generatDrone, generatCannon;
 
     //時間間隔の最小値と最大
     [SerializeField]
     private float minTime, maxTime;
 
-    private float intervalW, intervalD, intervalE;
+    private float intervalW, intervalD, intervalC;
 
     //経過時間
     private float time = 0f;
@@ -28,7 +31,7 @@ public class EnemyCreate : MonoBehaviour
     {
         intervalW = GetRandomTime();
         intervalD = GetRandomTime();
-        intervalE = GetRandomTime();
+        intervalC = GetRandomTime();
     }
 
     // Update is called once per frame
@@ -38,13 +41,13 @@ public class EnemyCreate : MonoBehaviour
         time += Time.deltaTime;
         CreateD();
         CreateW();
-        CreateE();
+        CreateC();
     }
 
     private void CreateD()
     {
         //経過時間が生成時間になったとき(生成時間より大きくなったとき)
-        if (time > intervalD)
+        if (time > intervalD & generatDrone == true)
         {
             GameObject drone = Instantiate(dronePrefab);
 
@@ -56,11 +59,11 @@ public class EnemyCreate : MonoBehaviour
             intervalD = GetRandomTime();
         }
     }
-    
+
     private void CreateW()
     {
         //経過時間が生成時間になったとき(生成時間より大きくなったとき)
-        if (time > intervalW)
+        if (time > intervalW &&generatWall == true)
         {
             GameObject wall = Instantiate(wallPrefab);
 
@@ -72,20 +75,20 @@ public class EnemyCreate : MonoBehaviour
             intervalW = GetRandomTime();
         }
     }
-    
-    private void CreateE()
+
+    private void CreateC()
     {
         //経過時間が生成時間になったとき(生成時間より大きくなったとき)
-        if (time > intervalE)
+        if (time > intervalC && generatCannon ==true)
         {
-            GameObject enemy = Instantiate(enemyPrefab);
+            GameObject cannon = Instantiate(cannonPrefab);
 
-            enemy.transform.position = new Vector2(player.transform.position.x + 30, -2.83f);
+            cannon.transform.position = new Vector2(player.transform.position.x + 30, -2.83f);
 
             //経過時間初期化
             time = 0f;
 
-            intervalE = GetRandomTime();
+            intervalC = GetRandomTime();
         }
     }
 

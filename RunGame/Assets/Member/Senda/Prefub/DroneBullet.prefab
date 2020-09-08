@@ -29,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6789387126976824924}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.068263, y: 3.2122624, z: 0}
+  m_LocalPosition: {x: 170.85905, y: 2.83, z: 0}
   m_LocalScale: {x: 0.39, y: 0.39, z: 0.39}
   m_Children: []
   m_Father: {fileID: 0}
@@ -115,9 +115,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 2
-  Dronebullet: {fileID: 0}
+  Dronebullet: {fileID: 6789387126976824924}
   bulletTime: 2
   bulletspeed: 2
+  player: {fileID: 4188923053745892568, guid: bccfbf54a542f514e9139e3bb045802d, type: 3}
+  bombEffect: {fileID: 6436252802427333164, guid: 1cf870eabf2e34e4d9eb1cdc687cd62c,
+    type: 3}
 --- !u!58 &5320800064230731850
 CircleCollider2D:
   m_ObjectHideFlags: 0

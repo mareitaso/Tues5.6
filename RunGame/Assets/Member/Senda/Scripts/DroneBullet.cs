@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class DroneBullet : DroneMove
 {
-    GameObject player;
-    PlayerController playercontroller;
-    // Start is called before the first frame update
+    [SerializeField]
+    PlayerController player;
+
+    [SerializeField]
+    private GameObject bombEffect;
+
     void Start()
     {
-        player = GameObject.Find("Player");
-        playercontroller = player.GetComponent<PlayerController>();
+        Destroy(this.gameObject, 1.5f);
     }
 
     // Update is called once per frame
@@ -27,13 +29,16 @@ public class DroneBullet : DroneMove
     {
         if (collision.CompareTag("Player"))
         {
-            playercontroller.playerHP -= 3;
+            player.PlayerDamage();
             Debug.Log("hit");
+            Instantiate(bombEffect, new Vector2(this.transform.position.x, this.transform.position.y), Quaternion.identity);
             Destroy(this.gameObject);
-        }else if (collision.CompareTag("press"))
+        }
+        else if (collision.CompareTag("Stage"))
         {
             //effect
         }
 
     }
+
 }

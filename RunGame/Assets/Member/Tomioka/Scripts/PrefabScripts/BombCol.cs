@@ -23,8 +23,13 @@ public class BombCol : MonoBehaviour
     //{
     //    player.jumpCom = false;
     //} void OnTriggerEnter2D(Collider2D other)
-    
-    
+
+    private void Start()
+    {
+        Destroy(this.gameObject, 3f);
+    }
+
+
     void OnTriggerEnter2D(Collider2D other)
     {
         Debug.Log("OnTriggerEnter2D: " + other.gameObject.name);

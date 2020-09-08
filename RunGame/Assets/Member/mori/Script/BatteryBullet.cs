@@ -10,6 +10,9 @@ public class BatteryBullet : MonoBehaviour
     bool IsArrivedDestination;
     PlayerController player2;
 
+    [SerializeField]
+    private GameObject bombEffect;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,7 +26,9 @@ public class BatteryBullet : MonoBehaviour
         {
             case "Player":
                 //col2d.isTrigger = true;
-                player2.playerHP -= 3;
+                player2.PlayerDamage();
+                Destroy(this.gameObject);
+                Instantiate(bombEffect, new Vector2(this.transform.position.x, this.transform.position.y), Quaternion.identity);
                 Debug.Log("弾がプレイヤーが当たった");
                 break;
         }
@@ -35,12 +40,12 @@ public class BatteryBullet : MonoBehaviour
         _timar -= Time.deltaTime;
         Vector2 tagetPos = player.transform.position;
 
-        if(_timar <= 0 )
+        if (_timar <= 0)
         {
             Destroy(gameObject);
         }
 
-        if(transform.position.x == tagetPos.x)
+        if (transform.position.x == tagetPos.x)
         {
             IsArrivedDestination = true;
         }
@@ -50,10 +55,10 @@ public class BatteryBullet : MonoBehaviour
             transform.position = new Vector2(Mathf.MoveTowards
             (transform.position.x, tagetPos.x, Time.deltaTime * _speed), transform.position.y);
         }
-        if(IsArrivedDestination)
+        if (IsArrivedDestination)
         {
             transform.position += new Vector3(-_speed * Time.deltaTime, 0, 0);
         }
-        Debug.Log((int)_timar);
+        //Debug.Log((int)_timar);
     }
 }

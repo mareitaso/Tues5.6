@@ -15,6 +15,10 @@ public class JumpCol : MonoBehaviour
     //        player.Jump();
     //    }
     //}
+    private void Start()
+    {
+        Destroy(this.gameObject, 3f);
+    }
 
     void OnTriggerEnter2D(Collider2D other)
     {

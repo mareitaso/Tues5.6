@@ -18,6 +18,7 @@ public class Battery : MonoBehaviour
     void Update()
     {
         _time -= Time.deltaTime;
+        
         if(_time <= 0)
         {
             Instantiate(BatteryBullet, transform.position, Quaternion.Euler(0,0,180f));

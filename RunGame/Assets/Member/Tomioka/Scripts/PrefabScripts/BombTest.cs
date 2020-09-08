@@ -43,11 +43,6 @@ public class BombTest : MonoBehaviour
         bombCol = Instantiate(bombCol, new Vector2(this.transform.position.x, this.transform.position.y), Quaternion.identity);
         jumpCol = Instantiate(jumpCol, new Vector2(this.transform.position.x, this.transform.position.y), Quaternion.identity);
         this.gameObject.SetActive(false);
-        Invoke("DestroyBomb", 0.5f);
-    }
-
-    private void DestroyBomb()
-    {
-        Destroy(this.gameObject);
+        Destroy(this.gameObject,0.5f);
     }
 }
