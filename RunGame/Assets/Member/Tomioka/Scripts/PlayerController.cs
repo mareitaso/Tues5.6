@@ -13,11 +13,11 @@ public class PlayerController : MonoBehaviour
     private float dashSpeed;
 
     public int playerHP = 10;
-    [SerializeField]
-    Text text;
 
+    private Rigidbody2D rb2d;
 
-    Rigidbody2D rb2d;
+    //[HideInInspector]
+    public bool jumpCom;
 
     private bool playerCol = true;
 
@@ -35,9 +35,15 @@ public class PlayerController : MonoBehaviour
     {
         PlayerMove();
         UseItem();
-        Jump();
         PlayerGameOver();
-        text.text = playerHP.ToString();
+
+        if (playerHP >= 0)
+        {
+            if (Input.GetKeyDown(KeyCode.Space) && rb2d.velocity.y == 0)
+            {
+                Jump();
+            }
+        }
     }
 
     private void PlayerMove()
@@ -59,15 +65,9 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    private void Jump()
+    public void Jump()
     {
-        if (playerHP >=0)
-        {
-            if (Input.GetKeyDown(KeyCode.Space) && rb2d.velocity.y == 0)
-            {
-                rb2d.AddForce(Vector2.up * 400);
-            }
-        }
+        rb2d.AddForce(Vector2.up * 400);
     }
 
     private void PlayerGameOver()
