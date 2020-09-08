@@ -7,11 +7,44 @@ public class JumpCol : MonoBehaviour
     [SerializeField]
     private PlayerController player;
 
-    public void OnCollisionEnter2D(Collision2D col)
+    //public void OnCollisionEnter2D(Collision2D col)
+    //{
+    //    Debug.Log("ジャンプ判定にあたった");
+    //    if (player.jumpCom == true && Input.GetKey(KeyCode.Space))
+    //    {
+    //        player.Jump();
+    //    }
+    //}
+
+    void OnTriggerEnter2D(Collider2D other)
     {
-        if (player.jumpCom == true && Input.GetKeyDown(KeyCode.Space))
-        {
-            player.Jump();
-        }
+        Debug.Log("OnTriggerEnter2D: " + other.gameObject.name);
+    }
+
+    void OnTriggerStay2D(Collider2D other)
+    {
+        Debug.Log("OnTriggerStay2D: " + other.gameObject.name);
+    }
+
+    void OnTriggerExit2D(Collider2D other)
+    {
+        Debug.Log("OnTriggerExit2D: " + other.gameObject.name);
+    }
+
+
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log("OnCollisionEnter2D: " + collision.gameObject.name);
+    }
+
+    void OnCollisionStay2D(Collision2D collision)
+    {
+        Debug.Log("OnCollisionStay2D: " + collision.gameObject.name);
+    }
+
+    void OnCollisionExit2D(Collision2D collision)
+    {
+        Debug.Log("OnCollisionExit2D: " + collision.gameObject.name);
     }
 }

@@ -37,7 +37,7 @@ public class PlayerController : MonoBehaviour
         UseItem();
         PlayerGameOver();
 
-        if (playerHP >= 0)
+        if (GameManager.instance.gameNow)
         {
             if (Input.GetKeyDown(KeyCode.Space) && rb2d.velocity.y == 0)
             {
@@ -76,6 +76,7 @@ public class PlayerController : MonoBehaviour
         {
             playerHP = 0;
             normalSpeed = 0;
+            GameManager.instance.gameNow = false;
         }
     }
 
@@ -109,8 +110,10 @@ public class PlayerController : MonoBehaviour
         //爆弾テスト
         if (Input.GetKeyDown(KeyCode.B))
         {
+            //Instantiate(bomb, new Vector2(this.transform.position.x + 1f, this.transform.position.y), Quaternion.identity);
+            //bomb.GetComponent<BombTest>().UseBomb(new Vector2(1000000, 1000000));
             Instantiate(bomb, new Vector2(this.transform.position.x + 1f, this.transform.position.y), Quaternion.identity);
-            bomb.GetComponent<BombTest>().UseBomb(new Vector2(1000000, 1000000));
+            bomb.GetComponent<BombTest>().UseBomb(new Vector2(10, 10));
         }
 
         //花火
