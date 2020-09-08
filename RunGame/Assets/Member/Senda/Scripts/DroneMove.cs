@@ -39,7 +39,6 @@ public class DroneMove : MonoBehaviour
         else
         {
             t += Time.deltaTime;
-            print(t);
         }
     }
     private void FixedUpdate()
