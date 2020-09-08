@@ -1,9 +1,9 @@
-﻿using System.Collections;
-using UnityEngine;
-using UnityEngine.SceneManagement;
+﻿using UnityEngine.SceneManagement;
 using System;
+using UnityEngine;
 
-
+// 
+[Serializable]
 public enum SCENE_TYPE
     {
         title,
@@ -13,11 +13,35 @@ public enum SCENE_TYPE
         SampleScene,
     }
 
-public class SceneMove
+public class SceneMove : MonoBehaviour
 {
-    public static void LoadScene(SCENE_TYPE _scene)
+    // クラス名＋Instance.でクラス内の public な関数を呼び出せる
+    public static SceneMove Instance { get { return _instance; } }
+    // SceneMoveのInstanceを作成
+    static SceneMove _instance;
+
+    // シーンの名前を入れる一時的な string
+    string _sceneName = null;
+
+    void Awake()
     {
-        SceneManager.LoadScene((int)_scene);
+        // instanceに自分のクラスを代入
+        _instance = this;
+    }
+    /// <summary>
+    /// シーン呼び出し用
+    /// </summary>
+    /// <param name="_scene">呼び出したいSceneを入れる</param>
+    public void LoadScene(SCENE_TYPE _scene)
+    {
+        switch (_scene) 
+        {
+            case SCENE_TYPE.title: _sceneName = "Title"; break;
+            case SCENE_TYPE.main: _sceneName = "Main"; break;
+            case SCENE_TYPE.result: _sceneName = "Result"; break;
+        }
+
+        if(null != _sceneName) SceneManager.LoadScene(_sceneName);
     }
     
 }
