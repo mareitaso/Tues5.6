@@ -7,6 +7,6 @@ public class ResultDirector : MonoBehaviour
 {
     public void OnClickStartButton()
     {
-        SceneManager.LoadScene("TitleSceneq");
+        SceneManager.LoadScene("TitleScene");
     }
 }
