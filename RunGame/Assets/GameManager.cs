@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : SingletonMonoBehaviour<GameManager>
 {
@@ -42,7 +43,8 @@ public class GameManager : SingletonMonoBehaviour<GameManager>
                 if (getTime < 0)
                 {
                     //シーン移動
-                    Debug.Log("");
+                    //SceneMove.Instance.LoadScene(SCENE_TYPE.result);
+                    SceneManager.LoadScene("TitleScene");
                 }
             }
             if (Input.GetKeyUp(KeyCode.Space))

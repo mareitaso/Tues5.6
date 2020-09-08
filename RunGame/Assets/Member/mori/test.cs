@@ -15,7 +15,7 @@ public class test : MonoBehaviour
     {
         if(Input.GetMouseButtonDown(0))
         {
-            SceneMove.LoadScene(SCENE_TYPE.main);
+            SceneMove.Instance.LoadScene(SCENE_TYPE.main);
         }
     }
 }

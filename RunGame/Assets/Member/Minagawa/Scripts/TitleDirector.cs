@@ -10,6 +10,7 @@ public class TitleDirector : MonoBehaviour
     public void OnClickStartButton()
     {
         SceneManager.LoadScene("Main");
+        //SceneMove.Instance.LoadScene(SCENE_TYPE.main);
     }
 
 }

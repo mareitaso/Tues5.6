@@ -669,7 +669,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &516943720
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1087,8 +1087,12 @@ MonoBehaviour:
   player: {fileID: 184244643}
   wallPrefab: {fileID: 8514938254309449015, guid: dcf6d1af255fe7d4aa03ce0f3f277e28,
     type: 3}
+  dronePrefab: {fileID: 361096029159360968, guid: 0d2959a9ebd0ace4ab8f598ef590c77a,
+    type: 3}
+  enemyPrefab: {fileID: 589685333319154461, guid: 1e557b9016cec934fae6de8ad831998a,
+    type: 3}
   minTime: 2
-  maxTime: 4
+  maxTime: 10
 --- !u!1 &973501842
 GameObject:
   m_ObjectHideFlags: 0

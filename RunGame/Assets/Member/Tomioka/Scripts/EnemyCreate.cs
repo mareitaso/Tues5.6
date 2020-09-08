@@ -9,12 +9,16 @@ public class EnemyCreate : MonoBehaviour
 
     [SerializeField]
     private GameObject wallPrefab;
+    [SerializeField]
+    private GameObject dronePrefab;
+    [SerializeField]
+    private GameObject enemyPrefab;
 
     //時間間隔の最小値と最大
     [SerializeField]
     private float minTime, maxTime;
 
-    private float interval;
+    private float intervalW, intervalD, intervalE;
 
     //経過時間
     private float time = 0f;
@@ -22,7 +26,9 @@ public class EnemyCreate : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        interval = GetRandomTime();
+        intervalW = GetRandomTime();
+        intervalD = GetRandomTime();
+        intervalE = GetRandomTime();
     }
 
     // Update is called once per frame
@@ -30,9 +36,31 @@ public class EnemyCreate : MonoBehaviour
     {
         //時間計測
         time += Time.deltaTime;
+        CreateD();
+        CreateW();
+        CreateE();
+    }
 
+    private void CreateD()
+    {
         //経過時間が生成時間になったとき(生成時間より大きくなったとき)
-        if (time > interval)
+        if (time > intervalD)
+        {
+            GameObject drone = Instantiate(dronePrefab);
+
+            drone.transform.position = new Vector2(player.transform.position.x + 30, +2.83f);
+
+            //経過時間初期化
+            time = 0f;
+
+            intervalD = GetRandomTime();
+        }
+    }
+    
+    private void CreateW()
+    {
+        //経過時間が生成時間になったとき(生成時間より大きくなったとき)
+        if (time > intervalW)
         {
             GameObject wall = Instantiate(wallPrefab);
 
@@ -41,7 +69,23 @@ public class EnemyCreate : MonoBehaviour
             //経過時間初期化
             time = 0f;
 
-            interval = GetRandomTime();
+            intervalW = GetRandomTime();
+        }
+    }
+    
+    private void CreateE()
+    {
+        //経過時間が生成時間になったとき(生成時間より大きくなったとき)
+        if (time > intervalE)
+        {
+            GameObject enemy = Instantiate(enemyPrefab);
+
+            enemy.transform.position = new Vector2(player.transform.position.x + 30, -2.83f);
+
+            //経過時間初期化
+            time = 0f;
+
+            intervalE = GetRandomTime();
         }
     }
 
