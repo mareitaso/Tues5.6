@@ -8,7 +8,7 @@ public class DroneMove : MonoBehaviour
 
     [SerializeField] private float moveSpeed = 2.0f;
 
-    [SerializeField] private GameObject bullet;
+    [SerializeField] private GameObject Dronebullet;
 
     [SerializeField] private float bulletTime = 2.0f;
 
@@ -29,9 +29,9 @@ public class DroneMove : MonoBehaviour
     {
         if (t > bulletTime)
         {
-            GameObject bullets = Instantiate(bullet) as GameObject;
+            GameObject bullets = Instantiate(Dronebullet) as GameObject;
 
-            bullet.transform.position = this.transform.position;
+            Dronebullet.transform.position = this.transform.position;
 
             t = 0.0f;
 

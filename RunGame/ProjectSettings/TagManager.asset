@@ -9,6 +9,7 @@ TagManager:
   - Stage
   - explosion
   - junp
+  - Press
   layers:
   - Default
   - TransparentFX
