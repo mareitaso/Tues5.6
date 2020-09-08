@@ -12,16 +12,21 @@ public class ScoreManager : MonoBehaviour
     // 初期化
     void Start()
     {
+        score_num = 0;
     }
 
     // 更新
     void Update()
     {
-        // オブジェクトからTextコンポーネントを取得
-        Text score_text = score_Text.GetComponent<Text>();
-        // テキストの表示を入れ替える
-        score_text.text = "Score:" + score_num.ToString("f1");
+        if (GameManager.instance.gameNow == true)
+        {
+            // オブジェクトからTextコンポーネントを取得
+            Text score_text = score_Text.GetComponent<Text>();
+            // テキストの表示を入れ替える
+            score_text.text = "Score:" + score_num.ToString("f1");
+            GameManager.instance.endScore.text = score_num.ToString("f1") + "点です";
 
-        score_num += 0.1f; // とりあえず1加算し続けてみる
+            score_num += 0.1f; // とりあえず1加算し続けてみる
+        }
     }
 }

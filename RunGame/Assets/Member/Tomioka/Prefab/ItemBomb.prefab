@@ -95,7 +95,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd4e8a053cd69e24d92cc7d700edf50f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bombEffect: {fileID: 1000013462590818, guid: ecdd96beb7f93494880c052dfccf9dc1, type: 3}
+  bombEffect: {fileID: 6436252802427333164, guid: 1cf870eabf2e34e4d9eb1cdc687cd62c,
+    type: 3}
+  bombCol: {fileID: 4011508650002367212, guid: c62f72a9492f54a4690171d626cb9cc3, type: 3}
+  jumpCol: {fileID: 8803795027868836065, guid: 3187ab50379e0604f98af5f603942511, type: 3}
+  forceX: 300
+  forceY: 300
 --- !u!61 &6233050867623353099
 BoxCollider2D:
   m_ObjectHideFlags: 0
