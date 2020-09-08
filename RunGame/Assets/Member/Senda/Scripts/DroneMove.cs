@@ -5,9 +5,14 @@ using UnityEngine;
 public class DroneMove : MonoBehaviour
 {
     Rigidbody2D _rigidbody;
+
     [SerializeField] private float moveSpeed = 2.0f;
+
     [SerializeField] private GameObject bullet;
+
     [SerializeField] private float bulletTime = 2.0f;
+
+    [SerializeField] public float bulletspeed = 2.0f;
 
     float t;
 
@@ -20,26 +25,31 @@ public class DroneMove : MonoBehaviour
     {
         _rigidbody.velocity = new Vector2(-moveSpeed, _rigidbody.velocity.y);
     }
-    void Beam()
+    void Attack()
     {
-        if(t > bulletTime)
+        if (t > bulletTime)
         {
-            bullet.SetActive(true);
+            GameObject bullets = Instantiate(bullet) as GameObject;
+
             bullet.transform.position = this.transform.position;
+
+            t = 0.0f;
 
         }
         else
         {
             t += Time.deltaTime;
-
+            print(t);
         }
     }
     private void FixedUpdate()
     {
-        Move();
+        //Move();
+        Attack();
     }
     void Update()
     {
-        
+
     }
+
 }
