@@ -15,13 +15,16 @@ public class EnemyCreate : MonoBehaviour
     private GameObject cannonPrefab;
 
     [SerializeField]
-    private bool generatWall, generatDrone, generatCannon;
+    private GameObject bombPrefab;
+
+    [SerializeField]
+    private bool generatWall, generatDrone, generatCannon, generatBomb;
 
     //時間間隔の最小値と最大
     [SerializeField]
     private float minTime, maxTime;
 
-    private float intervalW, intervalD, intervalC;
+    private float intervalW, intervalD, intervalC, intervalB;
 
     //経過時間
     private float time = 0f;
@@ -42,6 +45,7 @@ public class EnemyCreate : MonoBehaviour
         CreateD();
         CreateW();
         CreateC();
+        CreateB();
     }
 
     private void CreateD()
@@ -63,7 +67,7 @@ public class EnemyCreate : MonoBehaviour
     private void CreateW()
     {
         //経過時間が生成時間になったとき(生成時間より大きくなったとき)
-        if (time > intervalW &&generatWall == true)
+        if (time > intervalW && generatWall == true)
         {
             GameObject wall = Instantiate(wallPrefab);
 
@@ -79,7 +83,7 @@ public class EnemyCreate : MonoBehaviour
     private void CreateC()
     {
         //経過時間が生成時間になったとき(生成時間より大きくなったとき)
-        if (time > intervalC && generatCannon ==true)
+        if (time > intervalC && generatCannon == true)
         {
             GameObject cannon = Instantiate(cannonPrefab);
 
@@ -89,6 +93,22 @@ public class EnemyCreate : MonoBehaviour
             time = 0f;
 
             intervalC = GetRandomTime();
+        }
+    }
+
+    private void CreateB()
+    {
+        //経過時間が生成時間になったとき(生成時間より大きくなったとき)
+        if (time > intervalB && generatBomb == true)
+        {
+            GameObject bomb = Instantiate(bombPrefab);
+
+            bomb.transform.position = new Vector2(player.transform.position.x + 30, -3.77f);
+
+            //経過時間初期化
+            time = 0f;
+
+            intervalB = 10f;
         }
     }
 

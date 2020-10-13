@@ -22,7 +22,7 @@ public class Battery : MonoBehaviour
         if(_time <= 0)
         {
             Instantiate(BatteryBullet, transform.position, Quaternion.Euler(0,0,180f));
-            _time = 2; 
+            _time = 3; 
         }
     }
 }

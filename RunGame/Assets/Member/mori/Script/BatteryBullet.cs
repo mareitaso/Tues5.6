@@ -6,7 +6,7 @@ public class BatteryBullet : MonoBehaviour
 {
     GameObject player;
     float _speed = 10f;
-    float _timar = 5f;
+    float _timar = 6f;
     bool IsArrivedDestination;
     PlayerController player2;
 
@@ -50,7 +50,7 @@ public class BatteryBullet : MonoBehaviour
             IsArrivedDestination = true;
         }
 
-        if (!IsArrivedDestination)
+        if (!IsArrivedDestination && this.transform.position.x > player.transform.position.x - 1f)
         {
             transform.position = new Vector2(Mathf.MoveTowards
             (transform.position.x, tagetPos.x, Time.deltaTime * _speed), transform.position.y);

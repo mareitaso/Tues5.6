@@ -8,9 +8,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private GameObject bomb;
 
-    [SerializeField]
-    private float normalSpeed = 2;
-    private float dashSpeed;
+
+    public float normalSpeed = 2;
+    public float dashSpeed;
 
     public int playerHP = 10;
 
@@ -22,6 +22,8 @@ public class PlayerController : MonoBehaviour
     private bool playerCol = true;
 
     public float starTime = 3;
+
+    public int itemNum = 1;
 
     // Use this for initialization
     void Start()
@@ -88,9 +90,9 @@ public class PlayerController : MonoBehaviour
             //ここに攻撃判定があるものを追加していく
             case "Finish":
             case "wall":
-             
+
                 PlayerDamage();
-                
+
                 break;
 
             default:
@@ -103,8 +105,9 @@ public class PlayerController : MonoBehaviour
     private void UseItem()
     {
         //爆弾テスト
-        if (Input.GetKeyDown(KeyCode.B))
+        if (Input.GetKeyDown(KeyCode.B) && itemNum > 0)
         {
+            itemNum--;
             //Instantiate(bomb, new Vector2(this.transform.position.x + 1f, this.transform.position.y), Quaternion.identity);
             //bomb.GetComponent<BombTest>().UseBomb(new Vector2(1000000, 1000000));
             Instantiate(bomb, new Vector2(this.transform.position.x + 1f, this.transform.position.y), Quaternion.identity);
